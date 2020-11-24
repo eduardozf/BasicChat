@@ -1,0 +1,22 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root{
+  height: 100%;
+}
+
+*, button, input {
+  border: 0;
+  outline: 0;
+}
+
+:root {
+  --color1: #434B56;
+  --color2: #626F82;
+  --color3: #C8C2B6;
+  --color4: #E0E0D8;
+  --color5: #ECECEA;
+}

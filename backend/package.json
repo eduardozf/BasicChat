@@ -1,0 +1,18 @@
+{
+  "name": "BasicChat",
+  "version": "1.0.0",
+  "main": "src/server.js",
+  "author": "Eduardo ZF <eduardozf1@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "socket.io": "^3.0.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  },
+  "scripts": {
+    "dev": "nodemon"
+  }
+}
