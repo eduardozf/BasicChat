@@ -1,0 +1,134 @@
+.Container{
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+  width: 1000px;
+  padding: 10px;
+
+  background: var(--color5);
+  font-family: 'Open Sans', sans-serif;
+}
+
+.Messages{
+  display: flex;
+  flex-direction: column;
+
+  height: 500px;
+  overflow: hidden;
+  overflow-y: auto;
+}
+.Messages .MessageBox{
+  padding: 10px 0;
+  border-bottom: 1px solid var(--color3);
+}
+.Messages .MessageBox .User {
+  display: flex;
+  align-items: center;
+}
+.Messages .MessageBox .User img{
+  width: 30px;
+  height: 30px;
+  border-radius: 5px;
+}
+.Messages .MessageBox .User span{
+  margin-left: 6px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+.Messages .MessageBox .Message{
+  margin-top: 6px;
+}
+
+.TextInput {
+  display: flex;
+  flex: 1;
+  height: 160px;
+  margin-top: 10px;
+}
+.TextInput textarea{
+  display: flex;
+  flex: 1;
+
+  font-size: 16px;
+  padding: 10px;
+  resize: none;
+}
+.TextInput button{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+  font-size: 20px;
+  background: var(--color2);
+  color: #fff;
+  width: 100px;
+}
+
+.EditUser{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  overflow: hidden;
+  border-radius: 10px 0 0 10px;
+
+  height: 50px;
+  width: 50px;
+
+  background: var(--color4);
+
+  position: absolute;
+  left: -50px;
+  top: 0;
+
+  transition: 1s ease all;
+}
+.EditUser img{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+.EditUser .EditName{
+  display:  flex;
+  flex-direction: column;
+
+  width: 0px;
+  height: 0px;
+  overflow: hidden;
+  
+  transition: 5s ease-in all;
+}
+
+.EditUser .EditName input{
+  border-bottom: 1px solid #000;
+  background: none;
+  padding: 4px;
+}
+.EditUser .EditName input:focus{
+  background: #fdfdfd;
+}
+.EditUser .EditName button{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 4px;
+  margin-top: 4px;
+  background: rgb(52, 161, 67);
+  color: #fff;
+
+  cursor: pointer;
+}
+.EditUser:hover{
+  width: 200px;
+  height: 100px;
+
+  left: -200px;
+}
+.EditUser:hover .EditName{
+  width: auto;
+  height: auto;
+}

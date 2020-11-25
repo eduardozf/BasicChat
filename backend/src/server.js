@@ -10,18 +10,34 @@ const io = require('socket.io')(server, {
   }
 })
 
-io.on("connection", socket => {
-  console.log('New Connection', socket.id);
+let connectedUsers = [];
+let allMessages = [];
 
-  socket.on("hello", message => {
-    console.log(message);
+function MessageToUsers(owner, message) {
+  connectedUsers.forEach(socket => {
+    if (socket.id === owner.id) return;
+    socket.emit('message', message);
+  });
+}
+
+io.on("connection", socket => {
+  //On Socket Connect
+  connectedUsers.push(socket);
+  console.log('➰ New Connection', socket.id);
+
+  // On Recive Message
+  socket.on("message", message => {
+    allMessages.push(message)
+    MessageToUsers(socket, message)
+
+    console.log('⭐ New message from', socket.id);
   });
 
-  setTimeout(() => {
-    socket.emit('world', {
-      message: "Hello Front"
-    })
-  }, 7000)
+  // On Socket Disconnect
+  socket.on('disconnecting', () => {
+    connectedUsers = connectedUsers.filter(user => !(user.id === socket.id));
+    console.log(`⛔ User ${socket.id} disconnected`);
+  });
 });
 
 app.use(express.json());
