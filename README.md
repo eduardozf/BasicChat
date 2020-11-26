@@ -111,5 +111,5 @@ Eduardo Zotelli Ferraz - eduardozf1@gmail.com
 [issues-shield]: https://img.shields.io/github/issues/eduardozf/BasicChat.svg?style=flat-square
 [issues-url]: https://github.com/eduardozf/BasicChat/issues
 [license-shield]: https://img.shields.io/github/license/eduardozf/BasicChat.svg?style=flat-square
-[license-url]: https://github.com/eduardozf/BasicChat/blob/master/LICENSE.txt
+[license-url]: https://github.com/eduardozf/BasicChat/blob/master/LICENSE
 [product-screenshot]: ./exemple.gif
