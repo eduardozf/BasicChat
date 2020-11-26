@@ -23,14 +23,16 @@ function MessageToUsers(owner, message) {
 io.on("connection", socket => {
   //On Socket Connect
   connectedUsers.push(socket);
-  console.log('➰ New Connection', socket.id);
+  socket.emit('sync', allMessages);
+  console.log('⭐ New Connection', socket.id);
 
   // On Recive Message
   socket.on("message", message => {
     allMessages.push(message)
+    if (!(message.content.trim().length > 1)) return;
     MessageToUsers(socket, message)
 
-    console.log('⭐ New message from', socket.id);
+    console.log('✉️  New message from', socket.id);
   });
 
   // On Socket Disconnect

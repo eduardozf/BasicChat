@@ -2,45 +2,36 @@ import { useState, useEffect, useRef } from 'react';
 import io from 'socket.io-client';
 
 import './styles.css';
+import NotfSound from '../../assets/Notification.wav'
 
-const initialUserNum = new Date().getTime().toString();
+const initialUserId = new Date().getTime().toString();
 
 function ChatBox() {
-  const [messages, setMessages] = useState([
-    {
-      user: { name: "João", avatar: "https://api.hello-avatar.com/adorables/140/Joao" },
-      content: "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..."
-    },
-    {
-      user: { name: "Fulano", avatar: "https://api.hello-avatar.com/adorables/140/Fulano" },
-      content: "maecenas pharetra convallis posuere morbi"
-    },
-    {
-      user: { name: "João", avatar: "https://api.hello-avatar.com/adorables/140/Joao" },
-      content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Enim sit amet venenatis urna. Quam id leo in vitae turpis massa. In aliquam sem fringilla ut morbi."
-    },
-  ]);
+  const [messages, setMessages] = useState([]);
   const [socket, setSocket] = useState();
   const [myUser, setMyUser] = useState(
-    { name: `User${initialUserNum}`, avatar: `https://api.hello-avatar.com/adorables/140/${initialUserNum}` }
+    { name: `User${initialUserId}`, avatar: `https://api.hello-avatar.com/adorables/140/${initialUserId}` }
   );
   const TextRef = useRef();
   const UserInputRef = useRef();
+  const NotificationRef = useRef();
 
   //Connect to WebSocket
   useEffect(() => {
-    setSocket(io('ws://192.168.15.44:3333'));
+    setSocket(io('ws://localhost:3333'));
   }, [])
 
   //Message Recived
   useEffect(() => {
     if (!socket) return;
+
     socket.on("message", newMessage => {
-      console.log(newMessage);
+      document.querySelector('#Notification').play();
       setMessages(oldMessages => [...oldMessages, newMessage])
     });
-
-
+    socket.on("sync", allMessages => {
+      setMessages(allMessages)
+    });
   }, [socket])
 
   function ShowLocalMessage() {
@@ -48,9 +39,10 @@ function ChatBox() {
     setMessages(oldMessages => [...oldMessages, newMessage])
   }
 
-  function HandleSend(e) {
+  function HandleSubmit(e) {
     e.preventDefault();
     if (!socket || !TextRef) return;
+    if (!(TextRef.current.value.trim().length > 1)) return alert('You need to type somthing before submit!');
 
     socket.emit('message', {
       user: myUser,
@@ -69,8 +61,9 @@ function ChatBox() {
 
   return (
     <div className="Container">
+      <audio id="Notification" src={NotfSound} type="audio/wav" ref={NotificationRef} />
       <div className="Messages">
-        {socket && console.log(`Socket`, socket)}
+        {(messages.length < 1) ? (<div>No messages avaliable.</div>) : ''}
         {messages.map(message => (
           <div className="MessageBox">
             <div className="User">
@@ -84,16 +77,16 @@ function ChatBox() {
         ))}
       </div>
 
-      <form className="TextInput" onSubmit={(e) => HandleSend(e)} >
-        <textarea placeholder="Digite aqui ..." ref={TextRef} />
-        <button type="submit">Enviar</button>
+      <form className="TextInput" onSubmit={(e) => HandleSubmit(e)} >
+        <textarea placeholder="Type something ..." ref={TextRef} />
+        <button type="submit">Submit</button>
       </form>
 
       <div className="EditUser">
         <img src={myUser && myUser.avatar} alt="Profile" />
         <div className="EditName">
           <input type="text" ref={UserInputRef} placeholder={myUser && myUser.name} />
-          <button onClick={() => HandleChangeName()}>ALTERAR</button>
+          <button onClick={() => HandleChangeName()}>Change</button>
         </div>
       </div>
     </div>

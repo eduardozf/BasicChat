@@ -10,6 +10,7 @@
   font-family: 'Open Sans', sans-serif;
 }
 
+
 .Messages{
   display: flex;
   flex-direction: column;
@@ -58,12 +59,17 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  
+  transition: 0.2s ease-in-out all;
   cursor: pointer;
-
   font-size: 20px;
   background: var(--color2);
   color: #fff;
   width: 100px;
+}
+.TextInput button:hover{
+  font-size: 21px;
+  filter: brightness(1.2);
 }
 
 .EditUser{
@@ -101,7 +107,6 @@
   
   transition: 5s ease-in all;
 }
-
 .EditUser .EditName input{
   border-bottom: 1px solid #000;
   background: none;
@@ -131,4 +136,40 @@
 .EditUser:hover .EditName{
   width: auto;
   height: auto;
+}
+
+@media screen and (max-width: 1200px){
+  .Container{
+    width: 600px;
+  }
+  .Messages{
+    height: 300px;
+    font-size: 12px;
+  }
+  .TextInput{
+    height: 100px;
+  }
+  .TextInput textarea{
+    font-size: 10px;
+  }
+
+}
+@media screen and (max-height: 800px){
+  .Container{
+    width: 400px;
+  }
+  .Messages{
+    height: 200px;
+    font-size: 8px;
+  }
+  .TextInput{
+    height: 75px;
+  }
+  .TextInput textarea{
+    font-size: 10px;
+  }
+  .Messages .MessageBox .User img{
+    width: 20px;
+    height: 20px;
+  }
 }
