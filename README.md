@@ -44,7 +44,7 @@
 Possibilita enviar mensagem de texto em tempo real
 
 Motivo:
-* Meu foco foi treinar o socket.io juntamente com o ReactJS
+* Meu foco foi estudar socket.io juntamente com ReactJS
 
 ### Tecnologias utilizadas
 * ReactJS
