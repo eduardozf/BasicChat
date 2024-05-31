@@ -22,7 +22,8 @@
   </p>
 </p>
 
-
+> [!WARNING]  
+> **Aviso:** Este projeto está desatualizado e não receberá mais atualizações. Ele não representa o meu conhecimento atual.
 
 <!-- TABLE OF CONTENTS -->
 ## Sumário
